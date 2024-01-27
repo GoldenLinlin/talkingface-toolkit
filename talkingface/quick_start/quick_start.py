@@ -1,4 +1,6 @@
 import logging
+import os
+
 import sys
 import torch.distributed as dist
 from collections.abc import MutableMapping
@@ -29,6 +31,7 @@ def run(
         saved=True,
         evaluate_model_file=None
 ):
+    
     res = run_talkingface(
         model=model,
         dataset=dataset,
@@ -37,6 +40,7 @@ def run(
         saved=saved,
         evaluate_model_file=evaluate_model_file,
     )
+    
     return res
 
 def run_talkingface(
@@ -64,6 +68,12 @@ def run_talkingface(
         config_file_list=config_file_list,
         config_dict=config_dict,
     )
+    print(model)
+    print(dataset)
+    print(config_file_list)
+    print(config_dict)
+    print(saved)
+    print(evaluate_model_file)
     init_seed(config["seed"], config["reproducibility"])
     init_logger(config)
     logger = getLogger()
