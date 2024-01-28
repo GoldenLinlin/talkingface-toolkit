@@ -68,12 +68,6 @@ def run_talkingface(
         config_file_list=config_file_list,
         config_dict=config_dict,
     )
-    print(model)
-    print(dataset)
-    print(config_file_list)
-    print(config_dict)
-    print(saved)
-    print(evaluate_model_file)
     init_seed(config["seed"], config["reproducibility"])
     init_logger(config)
     logger = getLogger()
@@ -96,7 +90,6 @@ def run_talkingface(
     # load model
     model = get_model(config["model"])(config).to(config["device"])
     logger.info(model)
-
     trainer = get_trainer(config["model"])(config, model)
 
     # model training

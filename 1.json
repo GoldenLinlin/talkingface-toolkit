@@ -1,0 +1,20 @@
+{
+    "checkpoint_dir":"nmsl",
+    "checkpoint_sub_dir":"wcndm",
+    "temp_dir":"shabizuoye",
+    "temp_sub_dir":"nizahaibusi",
+    "learning_rate":0.01,
+    "betas":2,
+    "eps":0.001,
+    "weight_decay":0.1, 
+    "amsgrad":0.11,
+    "maximize":1, 
+    "foreach":1, 
+    "capturable":1,
+                        
+    "differentiable":1, 
+    "fused":0,
+    "learner":"adam",
+    "train":0
+
+}

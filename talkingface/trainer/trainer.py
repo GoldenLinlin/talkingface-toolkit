@@ -49,7 +49,7 @@ class AbstractTrainer(object):
         raise NotImplementedError("Method [next] should be implemented.")
     
 
-class Trainer(AbstractTrainer):
+class PC_AVSTrainer(AbstractTrainer):
     r"""The basic Trainer for basic training and evaluation strategies in talkingface systems. This class defines common
     functions for training and evaluation processes of most recommender system models, including fit(), evaluate(),
     resume_checkpoint() and some other features helpful for model training and evaluation.
@@ -63,7 +63,7 @@ class Trainer(AbstractTrainer):
 
     """
     def __init__(self, config, model):
-        super(Trainer, self).__init__(config, model)
+        super(PC_AVSTrainer, self).__init__(config, model)
         self.logger = getLogger()
         self.tensorboard = get_tensorboard(self.logger)
         self.wandblogger = WandbLogger(config)
@@ -87,7 +87,6 @@ class Trainer(AbstractTrainer):
         self.start_epoch = 0
         self.cur_step = 0
         self.train_loss_dict = dict()
-        self.optimizer = self._build_optimizer()
         self.evaluator = Evaluator(config)
 
         self.valid_metric_bigger = config["valid_metric_bigger"]
@@ -96,6 +95,8 @@ class Trainer(AbstractTrainer):
 
     def _build_optimizer(self, **kwargs):
         params = kwargs.pop("params", self.model.parameters())
+        print(self.model.parameters())
+        print(params)
         learner = kwargs.pop("learner", self.learner)
         learning_rate = kwargs.pop("learning_rate", self.learning_rate)
         weight_decay = kwargs.pop("weight_decay", self.weight_decay)
@@ -104,7 +105,8 @@ class Trainer(AbstractTrainer):
                 "The parameters [weight_decay] and [reg_weight] are specified simultaneously, "
                 "which may lead to double regularization."
             )
-
+        print(learning_rate)
+        print(weight_decay)
         if learner.lower() == "adam":
             optimizer = optim.Adam(params, lr=learning_rate, weight_decay=weight_decay)
         elif learner.lower() == "adamw":
@@ -448,7 +450,7 @@ class Trainer(AbstractTrainer):
 
 
 
-class Wav2LipTrainer(Trainer):
+class Wav2LipTrainer(PC_AVSTrainer):
     def __init__(self, config, model):
         super(Wav2LipTrainer, self).__init__(config, model)
 

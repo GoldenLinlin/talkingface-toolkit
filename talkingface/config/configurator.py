@@ -80,6 +80,7 @@ class Config(object):
         print(config_dict)
         self._load_internal_config_dict(self.model, self.model_class, self.dataset)
         self.final_config_dict = self._get_final_config_dict()
+        
         self._set_default_parameters()
         self._init_device()
 

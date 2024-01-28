@@ -1,54 +1,23 @@
+import torch
 import torch.nn as nn
-from torch.nn import init
+from torch.nn import functional as F
+from torch.nn.init import xavier_normal_, constant_
+from tqdm import tqdm
+from os import listdir, path
+import numpy as np
+import os, subprocess
+from glob import glob
+import cv2
 
+from talkingface.model.layers import Conv2d, Conv2dTranspose, nonorm_Conv2d
+from talkingface.model.abstract_talkingface import AbstractTalkingFace
+from talkingface.data.dataprocess.wav2lip_process import Wav2LipPreprocessForInference, Wav2LipAudio
+from talkingface.utils import ensure_dir
 
 class PC_AVS(nn.Module):
     def __init__(self):
-        super(PC_AVS, self).__init__()
+        self.linear=nn.Linear(1,1)
+    def forward(self,x):
+        out=self.linear(x)
+        return out
 
-    @staticmethod
-    def modify_commandline_options(parser, is_train):
-        return parser
-
-    def print_network(self):
-        if isinstance(self, list):
-            self = self[0]
-        num_params = 0
-        for param in self.parameters():
-            num_params += param.numel()
-        print('Network [%s] was created. Total number of parameters: %.1f million. '
-              'To see the architecture, do print(network).'
-              % (type(self).__name__, num_params / 1000000))
-
-    def init_weights(self, init_type='normal', gain=0.02):
-        def init_func(m):
-            classname = m.__class__.__name__
-            if classname.find('BatchNorm2d') != -1:
-                if hasattr(m, 'weight') and m.weight is not None:
-                    init.normal_(m.weight.data, 1.0, gain)
-                if hasattr(m, 'bias') and m.bias is not None:
-                    init.constant_(m.bias.data, 0.0)
-            elif hasattr(m, 'weight') and (classname.find('Conv') != -1 or classname.find('Linear') != -1):
-                if init_type == 'normal':
-                    init.normal_(m.weight.data, 0.0, gain)
-                elif init_type == 'xavier':
-                    init.xavier_normal_(m.weight.data, gain=gain)
-                elif init_type == 'xavier_uniform':
-                    init.xavier_uniform_(m.weight.data, gain=1.0)
-                elif init_type == 'kaiming':
-                    init.kaiming_normal_(m.weight.data, a=0, mode='fan_in')
-                elif init_type == 'orthogonal':
-                    init.orthogonal_(m.weight.data, gain=gain)
-                elif init_type == 'none':  # uses pytorch's default init method
-                    m.reset_parameters()
-                else:
-                    raise NotImplementedError('initialization method [%s] is not implemented' % init_type)
-                if hasattr(m, 'bias') and m.bias is not None:
-                    init.constant_(m.bias.data, 0.0)
-
-        self.apply(init_func)
-
-        # propagate to children
-        for m in self.children():
-            if hasattr(m, 'init_weights'):
-                m.init_weights(init_type, gain)

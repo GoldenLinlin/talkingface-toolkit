@@ -441,13 +441,17 @@ def create_dataset(config):
     model_name = config['model']
     dataset_file_name = model_name.lower()+'_dataset'
     module_path = ".".join(["talkingface.data.dataset", dataset_file_name])
+    print(module_path)
+    print(__name__)
     if importlib.util.find_spec(module_path, __name__):
         dataset_module = importlib.import_module(module_path, __name__)
-    if dataset_module is None:
-        raise ValueError(
-            "`dataset_file_name` [{}] is not the name of an existing dataset.".format(dataset_file_name)
-        )
+        if dataset_module is None:
+            raise ValueError(
+                "`dataset_file_name` [{}] is not the name of an existing dataset.".format(dataset_file_name)
+            )
     dataset_class = getattr(dataset_module, model_name+'Dataset')
+    print("************")
+    print(dataset_class)
 
     return dataset_class(config, config['train_filelist']), dataset_class(config, config['val_filelist'])
 
