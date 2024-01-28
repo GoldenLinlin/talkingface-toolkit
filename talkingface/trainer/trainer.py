@@ -432,17 +432,17 @@ class Trainer(AbstractTrainer):
                 model_file: str, the model file you want to evaluate.
 
         """
-        if load_best_model:
-            checkpoint_file = model_file or self.saved_model_file
-            print(checkpoint_file)
-            checkpoint = torch.load(checkpoint_file, map_location=self.device)
-            print(checkpoint)
-            self.model.load_state_dict(checkpoint["state_dict"])
-            self.model.load_other_parameter(checkpoint.get("other_parameter"))
-            message_output = "Loading model structure and parameters from {}".format(
-                checkpoint_file
-            )
-            self.logger.info(message_output)
+        # if load_best_model:
+        #     checkpoint_file = model_file or self.saved_model_file
+        #     print(checkpoint_file)
+        #     checkpoint = torch.load(checkpoint_file, map_location=self.device)
+        #     print(checkpoint)
+        #     self.model.load_state_dict(checkpoint["state_dict"])
+        #     self.model.load_other_parameter(checkpoint.get("other_parameter"))
+        #     message_output = "Loading model structure and parameters from {}".format(
+        #         checkpoint_file
+        #     )
+        #     self.logger.info(message_output)
         print("iamhere")
         self.model.eval()
         
