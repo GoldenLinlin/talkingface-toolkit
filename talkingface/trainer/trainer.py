@@ -49,7 +49,7 @@ class AbstractTrainer(object):
         raise NotImplementedError("Method [next] should be implemented.")
     
 
-class PC_AVSTrainer(AbstractTrainer):
+class Trainer(AbstractTrainer):
     r"""The basic Trainer for basic training and evaluation strategies in talkingface systems. This class defines common
     functions for training and evaluation processes of most recommender system models, including fit(), evaluate(),
     resume_checkpoint() and some other features helpful for model training and evaluation.
@@ -63,7 +63,7 @@ class PC_AVSTrainer(AbstractTrainer):
 
     """
     def __init__(self, config, model):
-        super(PC_AVSTrainer, self).__init__(config, model)
+        super(Trainer, self).__init__(config, model)
         self.logger = getLogger()
         self.tensorboard = get_tensorboard(self.logger)
         self.wandblogger = WandbLogger(config)
@@ -87,6 +87,7 @@ class PC_AVSTrainer(AbstractTrainer):
         self.start_epoch = 0
         self.cur_step = 0
         self.train_loss_dict = dict()
+        self.optimizer = self._build_optimizer()
         self.evaluator = Evaluator(config)
 
         self.valid_metric_bigger = config["valid_metric_bigger"]
@@ -95,8 +96,6 @@ class PC_AVSTrainer(AbstractTrainer):
 
     def _build_optimizer(self, **kwargs):
         params = kwargs.pop("params", self.model.parameters())
-        print(self.model.parameters())
-        print(params)
         learner = kwargs.pop("learner", self.learner)
         learning_rate = kwargs.pop("learning_rate", self.learning_rate)
         weight_decay = kwargs.pop("weight_decay", self.weight_decay)
@@ -105,8 +104,8 @@ class PC_AVSTrainer(AbstractTrainer):
                 "The parameters [weight_decay] and [reg_weight] are specified simultaneously, "
                 "which may lead to double regularization."
             )
-        print(learning_rate)
-        print(weight_decay)
+        print("!----------------")
+        print(self.model.parameters())
         if learner.lower() == "adam":
             optimizer = optim.Adam(params, lr=learning_rate, weight_decay=weight_decay)
         elif learner.lower() == "adamw":
@@ -435,24 +434,27 @@ class PC_AVSTrainer(AbstractTrainer):
         """
         if load_best_model:
             checkpoint_file = model_file or self.saved_model_file
+            print(checkpoint_file)
             checkpoint = torch.load(checkpoint_file, map_location=self.device)
+            print(checkpoint)
             self.model.load_state_dict(checkpoint["state_dict"])
             self.model.load_other_parameter(checkpoint.get("other_parameter"))
             message_output = "Loading model structure and parameters from {}".format(
                 checkpoint_file
             )
             self.logger.info(message_output)
+        print("iamhere")
         self.model.eval()
-
+        
         datadict = self.model.generate_batch()
         eval_result = self.evaluator.evaluate(datadict)
         self.logger.info(eval_result)
 
 
 
-class Wav2LipTrainer(PC_AVSTrainer):
+class PC_AVSTrainer(Trainer):
     def __init__(self, config, model):
-        super(Wav2LipTrainer, self).__init__(config, model)
+        super(PC_AVSTrainer, self).__init__(config, model)
 
     def _train_epoch(self, train_data, epoch_idx, loss_func=None, show_progress=False):
         r"""Train the model in an epoch

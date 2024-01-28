@@ -20,4 +20,5 @@ class PC_AVS(nn.Module):
     def forward(self,x):
         out=self.linear(x)
         return out
-
+    def generate_batch():
+        print("eeeeeeeeeeeeeeeeeeee")

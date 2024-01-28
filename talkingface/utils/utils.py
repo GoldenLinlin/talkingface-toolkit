@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 import torch 
 import torch.nn as nn
-
 from torch.utils.tensorboard import SummaryWriter
 from texttable import Texttable
 
@@ -64,9 +63,6 @@ def get_model(model_name):
         raise ValueError(
             "`model_name` [{}] is not the name of an existing model.".format(model_name)
         )
-    print("!!!!!!!!!!!")
-    print(model_module)
-    print(model_name)
     model_class = getattr(model_module, model_name)
     
     return model_class
