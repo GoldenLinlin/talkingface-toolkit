@@ -15,6 +15,9 @@
     "differentiable":1, 
     "fused":0,
     "learner":"adam",
-    "train":0
+    "train":0,
+    "metrics":"SSIM",
+    "generated_video":["talkingface\\data\\00015\\1_2.mp4"],
+    "real_video":["talkingface\\data\\00015\\2_1.mp4"]
 
 }
