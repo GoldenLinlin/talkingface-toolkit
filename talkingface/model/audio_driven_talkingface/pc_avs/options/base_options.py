@@ -2,10 +2,10 @@ import sys
 import argparse
 import math
 import os
-from talkingface.model.audio_driven_talkingface.pc_avs.util import util
+from util import util
 import torch
-import talkingface.model.audio_driven_talkingface.pc_avs.models as models
-import talkingface.model.audio_driven_talkingface.pc_avs.data as data
+import models
+import data
 import pickle
 
 
@@ -160,6 +160,8 @@ class BaseOptions():
         # modify model-related parser options
         model_name = opt.model
         model_option_setter = models.get_option_setter(model_name)
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print(model_option_setter)
         parser = model_option_setter(parser, self.isTrain)
 
         # modify dataset-related parser options

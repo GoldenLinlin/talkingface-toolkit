@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from talkingface.model.audio_driven_talkingface.pc_avs.util import util
+from util import util
 import torch.nn.functional as F
 
 

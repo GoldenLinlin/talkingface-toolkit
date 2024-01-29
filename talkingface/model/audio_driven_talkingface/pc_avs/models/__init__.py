@@ -4,7 +4,7 @@ def find_model_using_name(model_name):
     # Given the option --model [modelname],
     # the file "models/modelname_model.py"
     # will be imported.
-    model_filename =  model_name + "_model"
+    model_filename =  'models.'+model_name + "_model"
     print(model_filename)
     modellib = importlib.import_module(model_filename)
     # In the file, the class called ModelNameModel() will
@@ -24,9 +24,9 @@ def find_model_using_name(model_name):
 
 
 def get_option_setter(model_name):
-    pass
-    #model_class = find_model_using_name('talkingface.model.audio_driven_talkingface.pc_avs.'+model_name)
-    #return model_class.modify_commandline_options
+
+    model_class = find_model_using_name(model_name)
+    return model_class.modify_commandline_options
 
 
 def create_model(opt):

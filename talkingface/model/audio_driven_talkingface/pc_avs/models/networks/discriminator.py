@@ -1,9 +1,9 @@
 import torch.nn as nn
 import numpy as np
-from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.base_network import BaseNetwork
-import talkingface.model.audio_driven_talkingface.pc_avs.util.util as util
+from models.networks.base_network import BaseNetwork
+import util.util as util
 import torch
-from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.architecture import get_nonspade_norm_layer
+from models.networks.architecture import get_nonspade_norm_layer
 import torch.nn.functional as F
 
 

@@ -1,14 +1,14 @@
 import torch.nn as nn
 import numpy as np
 import torch.nn.functional as F
-from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.base_network import BaseNetwork
+from models.networks.base_network import BaseNetwork
 import torchvision.models.mobilenet
-from talkingface.model.audio_driven_talkingface.pc_avs.util import util
-from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.audio_network import ResNetSE, SEBasicBlock
+from util import util
+from models.networks.audio_network import ResNetSE, SEBasicBlock
 import torch
-from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.FAN_feature_extractor import FAN_use
+from models.networks.FAN_feature_extractor import FAN_use
 from torchvision.models.vgg import vgg19_bn
-from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.vision_network import ResNeXt50
+from models.networks.vision_network import ResNeXt50
 
 
 class ResSEAudioEncoder(BaseNetwork):
