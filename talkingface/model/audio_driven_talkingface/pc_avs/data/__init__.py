@@ -1,6 +1,6 @@
 import importlib
 import torch.utils.data
-from talkingface.model.text_to_speech.pc_avs.data.base_dataset import BaseDataset
+from talkingface.model.audio_driven_talkingface.pc_avs.data.base_dataset import BaseDataset
 
 
 def find_dataset_using_name(dataset_name):

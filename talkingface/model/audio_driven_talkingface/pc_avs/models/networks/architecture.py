@@ -2,9 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
-from models.networks.encoder import VGGEncoder
-from util import util
-from models.networks.sync_batchnorm import SynchronizedBatchNorm2d
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.encoder import VGGEncoder
+from talkingface.model.audio_driven_talkingface.pc_avs.util import util
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.sync_batchnorm import SynchronizedBatchNorm2d
 import torch.nn.utils.spectral_norm as spectral_norm
 
 

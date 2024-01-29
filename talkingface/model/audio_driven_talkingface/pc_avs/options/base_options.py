@@ -2,10 +2,10 @@ import sys
 import argparse
 import math
 import os
-from talkingface.model.text_to_speech.pc_avs.util import util
+from talkingface.model.audio_driven_talkingface.pc_avs.util import util
 import torch
-import talkingface.model.text_to_speech.pc_avs.models as models
-import talkingface.model.text_to_speech.pc_avs.data
+import talkingface.model.audio_driven_talkingface.pc_avs.models as models
+import talkingface.model.audio_driven_talkingface.pc_avs.data as data
 import pickle
 
 

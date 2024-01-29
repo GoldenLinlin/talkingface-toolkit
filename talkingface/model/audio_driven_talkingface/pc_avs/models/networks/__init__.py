@@ -1,10 +1,10 @@
 import torch
-from models.networks.base_network import BaseNetwork
-from models.networks.loss import *
-from models.networks.discriminator import MultiscaleDiscriminator, ImageDiscriminator
-from models.networks.generator import ModulateGenerator
-from models.networks.encoder import ResSEAudioEncoder, ResNeXtEncoder, ResSESyncEncoder, FanEncoder
-import util.util as util
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.base_network import BaseNetwork
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.loss import *
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.discriminator import MultiscaleDiscriminator, ImageDiscriminator
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.generator import ModulateGenerator
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.encoder import ResSEAudioEncoder, ResNeXtEncoder, ResSESyncEncoder, FanEncoder
+import talkingface.model.audio_driven_talkingface.pc_avs.util.util as util
 
 
 def find_network_using_name(target_network_name, filename):

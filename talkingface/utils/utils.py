@@ -55,9 +55,9 @@ def get_model(model_name):
     for submodule in model_submodule:
         module_path = ".".join(["talkingface.model", submodule, model_file_name])
         if importlib.util.find_spec(module_path, __name__):
-            print("----------------------------------------------------------")
-            print(module_path, __name__)
             model_module = importlib.import_module(module_path, __name__)
+            print(module_path, __name__)
+            print("!!!!!!!!!!!!!!!!!!!!")
             break
         
     if model_module is None:

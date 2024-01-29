@@ -1,8 +1,8 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from models.networks.base_network import BaseNetwork
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.base_network import BaseNetwork
 from torchvision.models.resnet import ResNet, Bottleneck
-from util import util
+from talkingface.model.audio_driven_talkingface.pc_avs.util import util
 import torch
 
 model_urls = {

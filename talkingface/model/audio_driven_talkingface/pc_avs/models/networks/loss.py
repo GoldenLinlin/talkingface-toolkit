@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from models.networks.architecture import VGG19, VGGFace19
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks.architecture import VGG19, VGGFace19
 
 
 # Defines the GAN loss which uses either LSGAN or the regular GAN.

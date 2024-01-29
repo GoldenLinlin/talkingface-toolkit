@@ -2,16 +2,16 @@ import torch
 import torch.nn as nn
 
 # 定义一个简单的模型
-class PC_AVS(nn.Module):
+class pc_avs(nn.Module):
     def __init__(self):
-        super(PC_AVS, self).__init__()
+        super(pc_avs, self).__init__()
         self.linear = nn.Linear(10, 5)
     
     def forward(self, x):
         return self.linear(x)
 
 # 创建模型实例
-model = PC_AVS()
+model = pc_avs()
 
 # 生成一个随机输入
 input_tensor = torch.randn((1, 10))

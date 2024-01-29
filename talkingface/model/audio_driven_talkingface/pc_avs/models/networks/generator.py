@@ -1,6 +1,6 @@
 import math
 import random
-from models.networks import BaseNetwork
+from talkingface.model.audio_driven_talkingface.pc_avs.models.networks import BaseNetwork
 import torch
 from torch import nn
 from torch.nn import functional as F

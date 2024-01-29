@@ -4,9 +4,9 @@ def find_model_using_name(model_name):
     # Given the option --model [modelname],
     # the file "models/modelname_model.py"
     # will be imported.
-    model_filename = "models." + model_name + "_model"
-    modellib = importlib.import_module('talkingface.model.text_to_speech.pc_avs.model_filename)
-
+    model_filename =  model_name + "_model"
+    print(model_filename)
+    modellib = importlib.import_module(model_filename)
     # In the file, the class called ModelNameModel() will
     # be instantiated. It has to be a subclass of torch.nn.Module,
     # and it is case-insensitive.
@@ -24,8 +24,9 @@ def find_model_using_name(model_name):
 
 
 def get_option_setter(model_name):
-    model_class = find_model_using_name('talkingface.model.text_to_speech.pc_avs.'+model_name)
-    return model_class.modify_commandline_options
+    pass
+    #model_class = find_model_using_name('talkingface.model.audio_driven_talkingface.pc_avs.'+model_name)
+    #return model_class.modify_commandline_options
 
 
 def create_model(opt):
