@@ -104,8 +104,6 @@ class Trainer(AbstractTrainer):
                 "The parameters [weight_decay] and [reg_weight] are specified simultaneously, "
                 "which may lead to double regularization."
             )
-        print("!----------------")
-        print(self.model.parameters())
         if learner.lower() == "adam":
             optimizer = optim.Adam(params, lr=learning_rate, weight_decay=weight_decay)
         elif learner.lower() == "adamw":

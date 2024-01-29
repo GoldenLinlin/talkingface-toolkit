@@ -114,10 +114,7 @@ def find_dataset_using_name(dataset_name):
     # and it is case-insensitive.
     dataset = None
     target_dataset_name = dataset_name.replace('_', '') + 'dataset'
-    print(target_dataset_name)
     for name, cls in datasetlib.__dict__.items():
-        print(name)
-        print(cls)
         if name.lower() == target_dataset_name.lower() :
             dataset = cls
             
@@ -132,7 +129,6 @@ def find_dataset_using_name(dataset_name):
 def get_option_setter(dataset_name):
     
     dataset_class = find_dataset_using_name(dataset_name)
-    print(dataset_name)
 
     return dataset_class.modify_commandline_options
 
@@ -141,7 +137,7 @@ def create_dataloader(opt):
     dataset_modes = opt.dataset_mode.split(',')
     if len(dataset_modes) == 1:
         dataset = find_dataset_using_name(opt.dataset_mode)
-        instance = dataset()
+        instance = dataset(opt)
         instance.initialize(opt)
         print("dataset [%s] of size %d was created" %
               (type(instance).__name__, len(instance)))

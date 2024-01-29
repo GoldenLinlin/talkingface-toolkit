@@ -25,7 +25,7 @@ def video_concat(processed_file_savepath, name, video_names, audio_path):
 
 
 def video_add_audio(name, audio_path, processed_file_savepath):
-    os.system('copy %* {} {}'.format(audio_path, processed_file_savepath))
+    os.system('cp  {} {}'.format(audio_path, processed_file_savepath))
     cmd = ['ffmpeg', '-i', '\'' + os.path.join(processed_file_savepath, name + '.mp4') + '\'',
                      '-i', audio_path,
                      '-q:v 0',

@@ -269,6 +269,7 @@ class AvModel(torch.nn.Module):
                 netD = networks.define_D(opt)
 
         if not opt.isTrain or opt.continue_train:
+
             self.load_network(netG, 'G', opt.which_epoch)
             self.load_network(netV, 'V', opt.which_epoch)
             self.load_network(netE, 'E', opt.which_epoch)
@@ -764,7 +765,7 @@ class AvModel(torch.nn.Module):
 
     def load_network(self, network, network_label, epoch_label):
         save_filename = '%s_net_%s.pth' % (epoch_label, network_label)
-        save_dir = self.save_dir
+        save_dir = "../../../../checkpoints/PC_AVS/demo/"
         save_path = os.path.join(save_dir, save_filename)
         if not os.path.isfile(save_path):
             if not self.opt.train_recognition:

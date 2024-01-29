@@ -13,13 +13,10 @@ import pickle
 class PC_AVS(torch.nn.Module):
     def generate_batch(self):
 
-        print(os.getcwd())
         os.chdir("./talkingface/model/audio_driven_talkingface/pc_avs")
-        print(os.getcwd())
-        print(torch.cuda.is_available())
-        os.system("python -u inference.py  --name demo --meta_path_vox './misc/demo.csv' --dataset_mode voxtest --netG modulate --netA resseaudio --netA_sync ressesync --netD multiscale  --netV resnext --netE fan --model av --gpu_ids 0 --clip_len 1 --batchSize 16 --style_dim 2560 --nThreads 4 --input_id_feature --generate_interval 1 --style_feature_loss --use_audio 1 --noise_pose --driving_pose  --gen_video --generate_from_audio_only")
+        torch.cuda.is_available()
+        os.system("CUDA_VISIBLE_DEVICES=0 python -u inference.py  --name demo --meta_path_vox './misc/demo.csv' --dataset_mode voxtest --netG modulate --netA resseaudio --netA_sync ressesync --netD multiscale  --netV resnext --netE fan --model av --gpu_ids 0 --clip_len 1 --batchSize 16 --style_dim 2560 --nThreads 4 --input_id_feature --generate_interval 1 --style_feature_loss --use_audio 1 --noise_pose --driving_pose  --gen_video --generate_from_audio_only")
         os.chdir("../../../../")
-        print(os.getcwd())
         
         return self.opt
     @staticmethod
